@@ -1,13 +1,23 @@
 .box {
-	width: 500px;
-	height: 500px;
-	background-color: purple;
-	padding: 20px;
+    width: 500px;
+    height: 500px;
+    background-color: purple;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+input {
+    width: 515px;
+    padding: 10px;
+    margin: 0 auto 20px auto;
+    display: block;
+    font-size: 14px;
+    font-family: Consolas;
 }
 
 p {
-	font-size: 16px;
-	font-family: Consolas;
-	color: white;
-	margin: 0;
+    font-size: 16px;
+    font-family: Consolas;
+    color: white;
+    margin: 0;
 }

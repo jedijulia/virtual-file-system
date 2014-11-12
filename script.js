@@ -1,33 +1,59 @@
-var root = new Node('7');
-var tree = new Tree(root);
-logger('Tree created');
-var root = tree.root;
-logger('7 added as root');
-tree.insert('3', root);
-logger('3 added as child of root');
-tree.insert('11', root);
-logger('11 added as child of root');
-tree.insert('7', '3');
-logger('7 added as child of 3');
-tree.insert('5', '3');
-logger('5 added as child of 3');
-tree.insert('4', '5');
-logger('4 added as child of 5');
-tree.insert('10', '11');
-logger('10 added as child of 11');
-tree.insert('15', '11');
-logger('15 added as child of 11');
-tree.insert('8', '11');
-logger('8 added as child of 11');
-tree.insert('9', '15');
-logger('9 added as child of 15');
-logger(tree.display());
-tree.remove('11');
-logger('11 removed');
-logger(tree.display());
+var tree = new Tree(null);
 
 function logger(message) {
-	var p = document.createElement('p');
-	p.textContent = message;
-	$('.box').append(p);
+    var p = $('<p>' + message + '</p>');
+    $('.box').append(p);
 }
+
+$('input').on('keydown', function(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        var input = $('input').val().trim();
+        var split = input.split(' ');
+        var command = split[0].trim();
+        if (command === 'insert') {
+            if (tree.root === null) {
+                tree.root = new Node(split[1]);
+                logger(split[1] + ' added as root.');
+            } else {
+                if (split.length < 3) {
+                    logger('Please specify a parent.');
+                } else {
+                    try {
+                        tree.insert(split[1], split[2]);
+                        logger(split[1] + ' added as child of ' + split[2]);
+                    } catch(e) {
+                        logger(e.message);
+                    }
+                }
+            }
+        } else if (command === 'remove') {
+            try {
+                tree.remove(split[1]);
+                logger(split[1] + ' was removed.');
+            } catch(e) {
+                logger(e.message);
+            }
+        } else if (command === 'search') {
+            var found = tree.search(split[1]);
+            if (found.length === 0) {
+                logger('Item not found.');
+            } else {
+                for (var i=0; i < found.length; i++) {
+                    var curr = found[i];
+                    var path = '';
+                    while (curr !== null) {
+                        path = '/' + curr.value + path;
+                        curr = curr.parent;
+                    }
+                    logger(path);
+                }
+            }
+        } else if (command === 'display') {
+            logger(tree.display());
+        } else {
+            logger('Invalid command.');
+        }
+        $('input').val(' ');
+    }
+});

@@ -50,13 +50,19 @@ function Tree(root) {
             to_insert_node.parent = parent;
         } else {
             var parent_node = this.search(parent)[0];
+            if (parent_node === undefined) {
+                throw new Error('Specified parent not found.');
+            }
             parent_node.add_child(to_insert_node);
             to_insert_node.parent = parent_node;
         }
     }
 
-    // tremove(node/value)
+    // remove(node/value)
     this.remove = function(to_remove) {
+        if (this.root === null) {
+            throw new Error('There is nothing to remove.');
+        }
         if (to_remove instanceof Node) {
             if (to_remove !== this.root) {
                 var parent = to_remove.parent;
@@ -67,6 +73,9 @@ function Tree(root) {
         } else {
             if (to_remove !== this.root.value) {
                 var to_remove_nodes = this.search(to_remove);
+                if (to_remove_nodes.length === 0) {
+                    throw new Error('The specified item does not exist.');
+                }
                 for (var i=0; i < to_remove_nodes.length; i++) {
                     var to_remove_node = to_remove_nodes[i];
                     var parent = to_remove_node.parent;
@@ -80,7 +89,10 @@ function Tree(root) {
 
     // tosearch(value), returns all the nodes
     this.search = function(to_search) {
-        var found = this.root.search(to_search);
+        var found = [];
+        if (this.root !== null) {
+            found = this.root.search(to_search);
+        }
         return found;
     }
 
@@ -103,20 +115,3 @@ function Tree(root) {
         }
     }
 }
-
-// var root = new Node('7');
-// var tree = new Tree(root);
-// var root = tree.root;
-// tree.insert('3', root);
-// tree.insert('11', root);
-// tree.insert('7', '3');
-// tree.insert('5', '3');
-// tree.insert('4', '5');
-// tree.insert('10', '11');
-// tree.insert('15', '11');
-// tree.insert('8', '11');
-// tree.insert('9', '15');
-// tree.display();
-// console.log('removal of 11');
-// tree.remove('11');
-// tree.display();
