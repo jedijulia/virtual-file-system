@@ -1,22 +1,53 @@
+body {
+    background-color: #0CA7D3;
+}
+
 .box {
     width: 500px;
-    height: 500px;
-    background-color: purple;
+    height: 400px;
+    background-color: #044C62;
     padding: 20px;
     margin: 0 auto;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.helpbox {
+    width: 200px;
+    height: 160px;
+    background-color: #0A99C3;
+    padding: 20px;
+    margin: 0 auto;
+    position: fixed;
+    top: 120px;
+    right: 10px;
 }
 
 input {
     width: 515px;
     padding: 10px;
-    margin: 0 auto 20px auto;
+    margin: 50px auto 20px auto;
     display: block;
     font-size: 14px;
     font-family: Consolas;
+    background-color: #ecf0f1;
 }
 
-p {
+h1 {
+    font-size: 18px;
+    font-family: Consolas;
+    color: #333;
+}
+
+.box p {
     font-size: 16px;
+    font-family: Consolas;
+    color: white;
+    margin: 0;
+}
+
+.helpbox p {
+    font-size: 14px;
     font-family: Consolas;
     color: white;
     margin: 0;

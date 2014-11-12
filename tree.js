@@ -100,13 +100,23 @@ function Tree(root) {
         var queue = [];
         var tree_str = '';
         if (this.root !== null) {
+            tree_str = 'Current Tree <br>';
+            var curr_level_count = 1;
+            var next_level_count = 0;
             queue.push(this.root);
             while (queue.length !== 0) {
                 var curr = queue.shift();
                 tree_str += curr.value + ' ';
+                curr_level_count --;
                 for (var i=0; i < curr.children.length; i++) {
                     var child = curr.children[i];
                     queue.push(child);
+                }
+                next_level_count += curr.children.length;
+                if (curr_level_count === 0) {
+                    tree_str += '<br>';
+                    curr_level_count = next_level_count;
+                    next_level_count = 0;
                 }
             }
             return tree_str;
