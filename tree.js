@@ -86,35 +86,37 @@ function Tree(root) {
 
     this.display = function() {
         var queue = [];
+        var tree_str = '';
         if (this.root !== null) {
             queue.push(this.root);
             while (queue.length !== 0) {
                 var curr = queue.shift();
-                console.log(curr.value);
+                tree_str += curr.value + ' ';
                 for (var i=0; i < curr.children.length; i++) {
                     var child = curr.children[i];
                     queue.push(child);
                 }
             }
+            return tree_str;
         } else {
-            console.log('The tree is empty.');
+            return 'The tree is empty.';
         }
     }
 }
 
-var root = new Node('7');
-var tree = new Tree(root);
-var root = tree.root;
-tree.insert('3', root);
-tree.insert('11', root);
-tree.insert('7', '3');
-tree.insert('5', '3');
-tree.insert('4', '5');
-tree.insert('10', '11');
-tree.insert('15', '11');
-tree.insert('8', '11');
-tree.insert('9', '15');
-tree.display();
-console.log('removal of 11');
-tree.remove('11');
-tree.display();
+// var root = new Node('7');
+// var tree = new Tree(root);
+// var root = tree.root;
+// tree.insert('3', root);
+// tree.insert('11', root);
+// tree.insert('7', '3');
+// tree.insert('5', '3');
+// tree.insert('4', '5');
+// tree.insert('10', '11');
+// tree.insert('15', '11');
+// tree.insert('8', '11');
+// tree.insert('9', '15');
+// tree.display();
+// console.log('removal of 11');
+// tree.remove('11');
+// tree.display();
