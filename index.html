@@ -1,19 +1,30 @@
 <!doctype html>
 <html>
     <head>
-        <title>Generic Tree</title>
+        <title>File System</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <input type ="text">
-        <div class="box"></div>
-        <div class="helpbox">
-            <h1>Commands:</h1>
-            <p>insert value parent</p>
-            <p>remove value</p>
-            <p>search value</p>
-            <p>display</p>
-            <p></br>* when adding first node (root): insert value</p>
+        <div class="window">
+            <div class="header">
+                <input type="text" name="address-bar" class="bar">
+                <input type="text" name="search-bar" class="bar">
+                <button id="new-button">New</button>
+            </div>
+            <div class="contents">
+                <div class="box"><p>Folder One</p></div>
+                <div class="box"><p>Folder Two</p></div>
+                <div class="box"><p>Folder Three</p></div>
+                <div class="box"><p>File One</p></div>
+                <div class="box"><p>File Two</p></div>
+                <div class="box"><p>File Three</p></div>
+                <div class="box"><p>Folder Four</p></div>
+                <div class="box"><p>Folder Five</p></div>
+                <div class="box"><p>Folder Six</p></div>
+                <div class="box"><p>File Four</p></div>
+                <div class="box"><p>File Five</p></div>
+                <div class="box"><p>File Six</p></div>
+            </div>
         </div>
         <script src="jquery.js"></script>
         <script src="tree.js"></script>
