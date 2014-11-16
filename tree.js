@@ -42,9 +42,13 @@ function Node(value) {
 function Tree(root) {
     this.root = root;
 
-    // to_insert(value), parent(node/value)
+    // to_insert(node/value), parent(node/value)
     this.insert = function(to_insert, parent) {
-        var to_insert_node = new Node(to_insert);
+        if (!(to_insert instanceof Node)) {
+            var to_insert_node = new Node(to_insert);
+        } else {
+            var to_insert_node = to_insert;
+        }
         if (parent instanceof Node) {
             parent.add_child(to_insert_node);
             to_insert_node.parent = parent;
