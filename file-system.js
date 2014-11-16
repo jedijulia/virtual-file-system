@@ -50,4 +50,8 @@ function FileSystem() {
             this.tree.insert(to_move, destination);
         }
     };
+
+    this.change_directory = function(destination) {
+        this.location = destination;
+    }
 }
