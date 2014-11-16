@@ -52,6 +52,29 @@ function FileSystem() {
     };
 
     this.change_directory = function(destination) {
-        this.location = destination;
-    }
+        if (destination instanceof Node) {
+            this.location = destination;
+        } else {
+            this.location = this.get_from_path(destination);
+        }
+    };
+
+    this.get_from_path = function(path) {
+        path = path.split('/');
+        if (path[0] == '') {
+            var curr = this.tree.root;
+            path = path.slice(1, path.length);
+        } else {
+            var curr = this.location;
+        }
+        for (var i=0; i < path.length; i++) {
+            if (path[i] !== '') {
+                curr = curr.find(path[i]);
+                if (curr === null) {
+                    throw new Error('Invalid path.');
+                }
+            }
+        }
+        return curr;
+    };
 }

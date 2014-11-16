@@ -12,7 +12,7 @@ function Node(value) {
     this.remove = function(child) {
         var i = this.children.indexOf(child);
         this.children.splice(i, 1);
-    }
+    };
 
     // accepts a value, returns an array of nodes
     this.search = function(to_search) {
@@ -25,7 +25,7 @@ function Node(value) {
             found = found.concat(child.search(to_search));
         }
         return found;
-    }
+    };
 
     // accepts a value, returns nodes that are direct children
     this.find = function(to_find) {
@@ -36,7 +36,7 @@ function Node(value) {
             }
         }
         return null;
-    }
+    };
 }
 
 function Tree(root) {
