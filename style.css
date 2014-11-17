@@ -1,17 +1,16 @@
 .window {
-    width: 1000px;
-    height: 600px;
-    border: 5px solid black;
-    margin: 0 auto;
-    position: relative;
-    top: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .header {
     position: relative;
     width: 100%;
     height: 10%;
-    border: 5 px solid purple;
+    border-bottom: 5px solid purple;
 }
 
 .contents {
@@ -45,15 +44,29 @@
     font-family: Consolas;
 }
 
+.folder {
+    background-color: purple;
+}
+
+.file {
+    background-color: pink;
+}
+
+.highlighted {
+    background-color: rgba(12, 167, 211, 0.5);
+}
+
 input[name="address-bar"] {
-    width: 600px;
+    width: 800px;
 }
 
 input[name="search-bar"] {
-    width: 250px;
+    width: 300px;
 }
 
-#new-button {
-    width: 80px;
+.new-button {
+    width: 100px;
     height: 35px;
+    font-size: 14px;
+    font-color: Consolas;
 }
