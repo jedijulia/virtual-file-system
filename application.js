@@ -23,3 +23,30 @@ $('#new-file-button').on('click', function(e) {
     console.log(file_system.tree.display());
     $('.contents').append('<div class="box file"><p>' + output + '</p></div>');
 });
+
+$('.contents').on('click', '.box', function(e) {
+    e.stopPropagation();
+    if (e.altKey === false) {
+        $('.box').removeClass('highlighted');
+        $(this).addClass('highlighted');
+    } else {
+        $(this).toggleClass('highlighted');
+    } 
+});
+
+$('.window').on('click', function(e) {
+    $('.box').removeClass('highlighted');
+});
+
+$(document).on('keydown', function(e) {
+    if (e.keyCode === 8) {
+        var names = [];
+        $('.box.highlighted').each(function() {
+            var name = $(this).find('p').text();
+            names.push(name);
+            $(this).remove();
+        });
+        file_system.delete(names);
+        console.log(file_system.tree.display());
+    }
+});
