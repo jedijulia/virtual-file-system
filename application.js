@@ -50,3 +50,12 @@ $(document).on('keydown', function(e) {
         console.log(file_system.tree.display());
     }
 });
+
+$('.window').on('dblclick', '.box', function(e) {
+    if ($(this).hasClass('folder')) {
+        var name = $(this).find('p').text();
+        file_system.change_directory(name);
+        update_display();
+        console.log(file_system.location.value);
+    }
+});
