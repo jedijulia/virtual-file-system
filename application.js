@@ -8,6 +8,10 @@ function update_display() {
         var curr = file_system.location.children[i];
         $('.contents').append('<div class="box ' + curr.type + '"><p>' + curr.value + '</p></div>');
     }
+    $('#back-button').removeClass('not-clickable');
+    if (file_system.location === file_system.tree.root) {
+        $('#back-button').addClass('not-clickable');
+    }
 }
 
 $('#new-folder-button').on('click', function(e) {
@@ -58,4 +62,12 @@ $('.window').on('dblclick', '.box', function(e) {
         update_display();
         console.log(file_system.location.value);
     }
+});
+
+$('.back-button').on('click', function(e) {
+    if (file_system.location !== file_system.tree.root) {
+        file_system.change_directory(file_system.location.parent);
+        update_display();
+    }
+    console.log(file_system.location.value);
 });

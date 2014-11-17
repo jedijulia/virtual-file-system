@@ -68,5 +68,17 @@ input[name="search-bar"] {
     width: 100px;
     height: 35px;
     font-size: 14px;
-    font-color: Consolas;
+    font-family: Consolas;
+}
+
+.back-button {
+    width: 60px;
+    height: 35px;
+    font-size: 14px;
+    font-family: Consolas;
+    margin-left: 5px;
+}
+
+.not-clickable{
+    background-color: gray;
 }
