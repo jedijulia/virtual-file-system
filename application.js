@@ -12,6 +12,17 @@ function update_display() {
     if (file_system.location === file_system.tree.root) {
         $('#back-button').addClass('not-clickable');
     }
+    var path = [];
+    var curr = file_system.location;
+    while (curr !== null) {
+        path.push(curr.value);
+        curr = curr.parent;
+    }
+    path = path.reverse().join('/');
+    if (path.length === 0) {
+        path = '/' + path;
+    }
+    $('input[name="address-bar"]').val(path);
 }
 
 $('#new-folder-button').on('click', function(e) {
