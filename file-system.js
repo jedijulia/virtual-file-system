@@ -33,9 +33,9 @@ function FileSystem() {
         }
     };
 
-    this.copy = function(names, destination) {
+    this.copy = function(source, names, destination) {
         for (var i=0; i < names.length; i++) {
-            var to_copy = this.location.find(names[i]);
+            var to_copy = source.find(names[i]);
             var copy = new Node(to_copy.value);
             copy.children = to_copy.children;
             copy.type = to_copy.type;
@@ -43,9 +43,9 @@ function FileSystem() {
         }
     };
 
-    this.move = function(names, destination) {
+    this.move = function(source, names, destination) {
         for (var i=0; i < names.length; i++) {
-            var to_move = this.location.find(names[i]);
+            var to_move = source.find(names[i]);
             this.tree.remove(to_move);
             this.tree.insert(to_move, destination);
         }
@@ -61,7 +61,7 @@ function FileSystem() {
 
     this.get_from_path = function(path) {
         path = path.split('/');
-        if (path[0] == '') {
+        if (path[0] === '') {
             var curr = this.tree.root;
             path = path.slice(1, path.length);
         } else {
