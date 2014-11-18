@@ -79,6 +79,51 @@ input[name="search-bar"] {
     margin-left: 5px;
 }
 
-.not-clickable{
+.not-clickable {
     background-color: gray;
+}
+
+.editor {
+    width: 450px;
+    height: 350px;
+    position: absolute;
+    bottom: 5px;
+    right: 6px;
+    border: 1px solid black;
+    display: none;
+}
+
+.editor-header {
+    height: 10%;
+    border-bottom: 1px solid black;
+}
+
+.editor-text {
+    height: 90%;
+}
+
+textarea[name="file-content"] {
+    width: 100%;
+    height: 99%;
+    font-size: 14px;
+    font-family: Consolas;
+    border: none;
+    padding: 0;
+}
+
+input[name="file-title"] {
+    width: 370px;
+    height: 25px;
+    margin-left: 5px;
+    margin-top: 2px;
+    vertical-align: top;
+}
+
+#close-button {
+    width: 60px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Consolas;
+    margin-top: 3px;
+    vertical-align: top;
 }
