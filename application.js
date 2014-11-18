@@ -154,3 +154,14 @@ $('.back-button').on('click', function(e) {
     console.log(file_system.location.value);
 });
 
+$('input[name="address-bar"]').on('keydown', function(e) {
+    if (e.keyCode === 13) {
+        try {
+            file_system.change_directory($(this).val());
+        } catch(e) {
+            alert(e.message);
+        }
+        update_display();
+    }
+});
+
