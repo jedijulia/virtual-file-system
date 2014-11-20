@@ -9,30 +9,20 @@ function update_display() {
     $('.contents').empty();
     for (var i=0; i < file_system.location.children.length; i++) {
         var curr = file_system.location.children[i];
-        $('.contents').append('<div class="box ' + curr.type + '"><p>' + curr.value + '</p></div>');
+        $('.contents').append('<div class="box ' + curr.type + '" data-path="' + file_system.get_absolute_path(curr) + '"><p>' + curr.value + '</p></div>');
     }
     $('#back-button').removeClass('not-clickable');
     if (file_system.location === file_system.tree.root) {
         $('#back-button').addClass('not-clickable');
     }
-    var path = [];
-    var curr = file_system.location;
-    while (curr !== null) {
-        path.push(curr.value);
-        curr = curr.parent;
-    }
-    path = path.reverse().join('/');
-    if (path.length === 0) {
-        path = '/' + path;
-    }
-    $('input[name="address-bar"]').val(path);
+    $('input[name="address-bar"]').val(file_system.get_absolute_path(file_system.location));
 }
 
 $('#new-folder-button').on('click', function(e) {
     var output = prompt('Enter folder name');
     file_system.create_folder(output);
     console.log(file_system.tree.display());
-    $('.contents').append('<div class="box folder"><p>' + output + '</p></div>');
+    update_display();
 });
 
 $('#new-file-button').on('click', function(e) {
@@ -52,8 +42,9 @@ $('.editor').on('keydown', function(e) {
                 file_system.create_file(file_title, file_content);
                 console.log(file_system.tree.display());
             } else {
-                file_system.rename(new_file, file_title);
-                file_system.edit_file(file_title, file_content);
+                var path = $(this).attr('data-path');
+                file_system.edit_file(path, file_content);
+                file_system.rename(path, file_title);
             }
             $('input[name="file-title"]').val('');
             $('textarea[name="file-content"]').val('');        
@@ -132,15 +123,15 @@ $(document).on('keydown', function(e) {
 
 $('.window').on('dblclick', '.box', function(e) {
     if ($(this).hasClass('folder')) {
-        var name = $(this).find('p').text();
-        file_system.change_directory(name);
+        var path = $(this).attr('data-path');
+        file_system.change_directory(path);
         update_display();
-        console.log(file_system.location.value);
     }
     if ($(this).hasClass('file')) {
         $('.editor').show();
-        var file = file_system.location.find($(this).find('p').text());
+        var file = file_system.get_from_path($(this).attr('data-path'));
         $('.editor').attr('new-file', file.value);
+        $('.editor').attr('data-path', $(this).data('path'));
         $('.editor input[name="file-title"]').val(file.value);
         $('.editor textarea[name="file-content"]').val(file.content);
     }
@@ -165,3 +156,27 @@ $('input[name="address-bar"]').on('keydown', function(e) {
     }
 });
 
+$('input[name="search-bar"]').on('keydown', function(e) {
+    if (e.keyCode === 13) {
+        var found = file_system.tree.search($(this).val());
+        $('.contents').empty();
+        if (found.length === 0) {
+            $('.contents').append('<p>No results found.</p>');
+        }
+        for (var i=0; i < found.length; i++) {
+            var curr = found[i];
+            $('.contents').append('<div class="box ' + curr.type + '" data-path="' + file_system.get_absolute_path(curr) + '"><p>' + curr.value + '</p></div>');
+        }
+        $('#back-button').removeClass('not-clickable');
+        if (file_system.location === file_system.tree.root) {
+            $('#back-button').addClass('not-clickable');
+        }
+        $('input[name="address-bar"]').val(file_system.get_absolute_path(file_system.location));
+        $('#exit-search-button').show();
+    }
+});
+
+$('#exit-search-button').on('click', function(e) {
+    $(this).hide();
+    update_display();
+});

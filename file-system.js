@@ -16,13 +16,14 @@ function FileSystem() {
         new_file.content = content; 
     };
 
-    this.edit_file = function(name, content) {
-        var file = this.location.find(name);
+    this.edit_file = function(path, content) {
+        var file = this.get_from_path(path);
+        console.warn(file.value)
         file.content = content;
     };
 
-    this.rename = function(name, new_name) {
-        var to_rename = this.location.find(name);
+    this.rename = function(path, new_name) {
+        var to_rename = this.get_from_path(path);
         to_rename.value = new_name;
     };
 
@@ -60,6 +61,7 @@ function FileSystem() {
     };
 
     this.get_from_path = function(path) {
+        console.info(path);
         path = path.split('/');
         if (path[0] === '') {
             var curr = this.tree.root;
@@ -77,4 +79,18 @@ function FileSystem() {
         }
         return curr;
     };
+
+    this.get_absolute_path = function(node) {
+        var path = [];
+        var curr = node;
+        while (curr !== null) {
+            path.push(curr.value);
+            curr = curr.parent;
+        }
+        path = path.reverse().join('/');
+        if (path.length === 0) {
+            path = '/' + path;
+        }
+        return path;
+    }
 }
