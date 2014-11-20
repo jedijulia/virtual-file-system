@@ -140,8 +140,8 @@ $('.back-button').on('click', function(e) {
     if (file_system.location !== file_system.tree.root) {
         file_system.change_directory(file_system.location.parent);
         update_display();
+        $('#exit-search-button').hide();
     }
-    console.log(file_system.location.value);
 });
 
 $('input[name="address-bar"]').on('keydown', function(e) {
@@ -157,7 +157,9 @@ $('input[name="address-bar"]').on('keydown', function(e) {
 
 $('input[name="search-bar"]').on('keydown', function(e) {
     if (e.keyCode === 13) {
-        var found = file_system.tree.search($(this).val());
+        var query = $(this).val();
+        query = query.replace(/\./g, '\\.').replace(/\*/g, '\.\*');
+        var found = file_system.tree.search(query);
         $('.contents').empty();
         if (found.length === 0) {
             $('.contents').append('<p>No results found.</p>');
