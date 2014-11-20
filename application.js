@@ -1,7 +1,6 @@
 var file_system = new FileSystem();
 
 var clipboard = [];
-var clipboard_src;
 var operation = '';
 update_display();
 
@@ -90,33 +89,30 @@ $(document).on('keydown', function(e) {
     // ctrl+c
     if (e.keyCode === 67 && e.ctrlKey === true) {
         $('.box.highlighted').each(function() {
-            var name = $(this).find('p').text();
-            clipboard.push(name);
+            var path = $(this).attr('data-path');
+            clipboard.push(path);
         });
-        clipboard_src = file_system.location;
         operation = 'copy';
     }
     // ctrl+x
     if (e.keyCode === 88 && e.ctrlKey === true) {
         $('.box.highlighted').each(function() {
-            var name = $(this).find('p').text();
-            clipboard.push(name);
+            var path = $(this).attr('data-path');
+            clipboard.push(path);
         });
-        clipboard_src = file_system.location;
         operation = 'cut';
     }
     // ctrl+v
     if (e.keyCode === 86 && e.ctrlKey === true && clipboard.length > 0) {
         if (operation === 'copy') {
-            file_system.copy(clipboard_src, clipboard, file_system.location);
+            file_system.copy(clipboard, file_system.location);
         }
         if (operation === 'cut') {
-            file_system.move(clipboard_src, clipboard, file_system.location);
+            file_system.move(clipboard, file_system.location);
         }
         console.log(file_system.tree.display());
         update_display();
         clipboard = [];
-        clipboard_src = undefined;
         operation = '';
     }
 });
