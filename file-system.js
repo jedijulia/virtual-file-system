@@ -18,7 +18,6 @@ function FileSystem() {
 
     this.edit_file = function(path, content) {
         var file = this.get_from_path(path);
-        console.warn(file.value)
         file.content = content;
     };
 
@@ -38,7 +37,10 @@ function FileSystem() {
         for (var i=0; i < paths.length; i++) {
             var to_copy = this.get_from_path(paths[i]);
             var copy = new Node(to_copy.value);
-            copy.children = to_copy.children;
+            for (var j=0; j < to_copy.children.length; j++) {
+                var child = to_copy.children[j];
+                this.copy([this.get_absolute_path(child)], copy);
+            }
             copy.type = to_copy.type;
             this.tree.insert(copy, destination);
         }
@@ -61,7 +63,6 @@ function FileSystem() {
     };
 
     this.get_from_path = function(path) {
-        console.info(path);
         path = path.split('/');
         if (path[0] === '') {
             var curr = this.tree.root;

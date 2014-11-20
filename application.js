@@ -88,6 +88,7 @@ $(document).on('keydown', function(e) {
     }
     // ctrl+c
     if (e.keyCode === 67 && e.ctrlKey === true) {
+        clipboard = [];
         $('.box.highlighted').each(function() {
             var path = $(this).attr('data-path');
             clipboard.push(path);
@@ -96,6 +97,7 @@ $(document).on('keydown', function(e) {
     }
     // ctrl+x
     if (e.keyCode === 88 && e.ctrlKey === true) {
+        clipboard = [];
         $('.box.highlighted').each(function() {
             var path = $(this).attr('data-path');
             clipboard.push(path);
