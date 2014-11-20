@@ -14,15 +14,15 @@ function Node(value) {
         this.children.splice(i, 1);
     };
 
-    // accepts a value, returns an array of nodes
-    this.search = function(to_search) {
+    // accepts a query, returns an array of nodes
+    this.search = function(query) {
         var found = [];
-        if (this.value === to_search) {
+        if (this.value.match('^' + query + '$')) {
             found.push(this);
         }
         for (var i=0; i < this.children.length; i++) {
             var child = this.children[i];
-            found = found.concat(child.search(to_search));
+            found = found.concat(child.search(query));
         }
         return found;
     };
