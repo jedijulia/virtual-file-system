@@ -8,16 +8,15 @@
 
 .header {
     position: relative;
-    width: 100%;
-    height: 10%;
-    border-bottom: 5px solid purple;
+    height: 55px;
+    background-color: #4D4479;
+    padding: 5px 0px;
 }
 
 .contents {
+    background-color: #6E63A7;
     position: relative;
-    width: 100%;
-    height: 90%;
-    border: 1px solid green;
+    height: calc(100% - 65px);
 }
 
 .box {
@@ -26,8 +25,12 @@
     display: inline-block;
     margin: 20px;
     cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid red;
+    border-radius: 500px;
+    vertical-align: top;
+    background-size: 75px 65px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #5DB0E6;
 }
 
 p {
@@ -45,23 +48,27 @@ p {
 }
 
 .folder {
-    background-color: purple;
+    background-image: url('images/folder2.svg'); 
 }
 
 .file {
-    background-color: pink;
+    background-image: url('images/file.svg');
 }
 
 .highlighted {
-    background-color: rgba(12, 167, 211, 0.5);
+    background-color: #F06292;
 }
 
 input[name="address-bar"] {
     width: 800px;
+    background-color: #bdc3c7;
+    border: none;
 }
 
 input[name="search-bar"] {
     width: 300px;
+    background-color: #bdc3c7;
+    border: none;
 }
 
 .new-button {
@@ -69,6 +76,9 @@ input[name="search-bar"] {
     height: 35px;
     font-size: 14px;
     font-family: Consolas;
+    color: white;
+    background-color: #6E63A7;
+    border: none;
 }
 
 .back-button {
@@ -77,6 +87,9 @@ input[name="search-bar"] {
     font-size: 14px;
     font-family: Consolas;
     margin-left: 5px;
+    color: white;
+    background-color: #6E63A7;
+    border: none;
 }
 
 .not-clickable {
@@ -91,6 +104,7 @@ input[name="search-bar"] {
     right: 6px;
     border: 1px solid black;
     display: none;
+    background-color: white;
 }
 
 .editor-header {
@@ -114,6 +128,8 @@ textarea[name="file-content"] {
 input[name="file-title"] {
     width: 370px;
     height: 25px;
+    font-size: 14px;
+    font-family: Consolas;
     margin-left: 5px;
     margin-top: 2px;
     vertical-align: top;
@@ -146,7 +162,8 @@ input[name="file-title"] {
     font-size: 14px;
     font-family: Consolas;
     border: 1px solid black;
-    background-color: white;
+    background-color: #bdc3c7;
     display: none;
     z-index: 1;
+    cursor: pointer;
 }
