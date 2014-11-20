@@ -139,3 +139,14 @@ input[name="file-title"] {
     display: none;
     z-index: 1;
 }
+
+.rename {
+    position: absolute;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: Consolas;
+    border: 1px solid black;
+    background-color: white;
+    display: none;
+    z-index: 1;
+}

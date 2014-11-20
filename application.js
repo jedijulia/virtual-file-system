@@ -73,6 +73,7 @@ $('.contents').on('click', '.box', function(e) {
 
 $('.window').on('click', function(e) {
     $('.box').removeClass('highlighted');
+    $('.rename').hide();
 });
 
 $(document).on('keydown', function(e) {
@@ -176,5 +177,18 @@ $('input[name="search-bar"]').on('keydown', function(e) {
 
 $('#exit-search-button').on('click', function(e) {
     $(this).hide();
+    update_display();
+});
+
+$('.contents').on('contextmenu', '.box', function(e) {
+    e.preventDefault();
+    $('.rename').show();
+    $('.rename').css({'top': (e.pageY + 'px'), 'left': (e.pageX + 'px')});
+    $('.rename').attr('path', $(this).attr('data-path'));
+});
+
+$('.rename').on('click', function(e) {
+    var name = prompt('Enter new name');
+    file_system.rename($(this).attr('path'), name);
     update_display();
 });
