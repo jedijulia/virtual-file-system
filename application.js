@@ -72,12 +72,12 @@ $('#close-button').on('click', function(e) {
 
 $('.contents').on('click', '.box', function(e) {
     e.stopPropagation();
-    if (e.altKey === false) {
-        $('.box').removeClass('highlighted');
-        $(this).addClass('highlighted');
-    } else {
+    if (e.altKey === true || e.ctrlKey === true) {
         $(this).toggleClass('highlighted');
-    } 
+    } else {
+        $('.box').removeClass('highlighted');
+        $(this).addClass('highlighted');        
+    }
 });
 
 $('.window').on('click', function(e) {
