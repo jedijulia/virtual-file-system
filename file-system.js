@@ -4,16 +4,25 @@ function FileSystem() {
     this.location = this.tree.root;
 
     this.create_folder = function(name) {
-        this.tree.insert(name, this.location);
-        var new_folder = this.location.find(name);
-        new_folder.type = 'folder';
+        if (this.location.find(name) === null) {
+            this.tree.insert(name, this.location);
+            var new_folder = this.location.find(name, undefined);
+            new_folder.type = 'folder';
+        } else {
+            throw new Error('Name already exists.');
+        }
     };
 
     this.create_file = function(name, content) {
-        this.tree.insert(name, this.location)
-        var new_file = this.location.find(name);
-        new_file.type = 'file';
-        new_file.content = content; 
+        if (this.location.find(name) === null) {
+            this.tree.insert(name, this.location);
+            var new_file = this.location.find(name, undefined);
+            new_file.type = 'file';
+            new_file.content = content;
+        } else {
+            throw new Error('Name already exists.');
+        }
+
     };
 
     this.edit_file = function(path, content) {

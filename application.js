@@ -19,13 +19,19 @@ function update_display() {
 
 $('#new-folder-button').on('click', function(e) {
     var output = prompt('Enter folder name');
-    file_system.create_folder(output);
-    console.log(file_system.tree.display());
+    if (output !== '') {
+        try {
+            file_system.create_folder(output);
+        } catch(e) {
+            alert(e.message);
+        } 
+    } else {
+        alert('Please enter a name for your folder.');
+    }
     update_display();
 });
 
 $('#new-file-button').on('click', function(e) {
-    // var output = prompt('Enter file name');
     $('.editor').show();
     $('.editor').attr('new-file', 'true');
 });
@@ -38,8 +44,11 @@ $('.editor').on('keydown', function(e) {
         if (file_title !== '') {
             var new_file = $(this).attr('new-file');
             if (new_file === 'true') {
-                file_system.create_file(file_title, file_content);
-                console.log(file_system.tree.display());
+                try {
+                    file_system.create_file(file_title, file_content);
+                } catch(e) {
+                    alert(e.message);
+                }
             } else {
                 var path = $(this).attr('data-path');
                 file_system.edit_file(path, file_content);
@@ -162,7 +171,7 @@ $('input[name="search-bar"]').on('keydown', function(e) {
         var found = file_system.tree.search(query);
         $('.contents').empty();
         if (found.length === 0) {
-            $('.contents').append('<p>No results found.</p>');
+            $('.contents').append('<p id="no-results">No results found.</p>');
         }
         for (var i=0; i < found.length; i++) {
             var curr = found[i];

@@ -40,6 +40,11 @@ p {
     font-family: Consolas;
 }
 
+p#no-results {
+    margin-top: 0px;
+    padding-top: 100px;
+}
+
 .bar {
     height: 30px;
     margin: 10px;
@@ -48,7 +53,7 @@ p {
 }
 
 .folder {
-    background-image: url('images/folder2.svg'); 
+    background-image: url('images/folder.svg'); 
 }
 
 .file {
