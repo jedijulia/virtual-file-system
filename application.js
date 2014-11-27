@@ -4,6 +4,7 @@ var clipboard = [];
 var operation = '';
 update_display();
 
+// display the contents at the current location
 function update_display() {
     $('.contents').empty();
     for (var i=0; i < file_system.location.children.length; i++) {
@@ -17,9 +18,10 @@ function update_display() {
     $('input[name="address-bar"]').val(file_system.get_absolute_path(file_system.location));
 }
 
+// create a new folder
 $('#new-folder-button').on('click', function(e) {
     var output = prompt('Enter folder name');
-    if (output !== '') {
+    if (output !== '' && output !== null) {
         try {
             file_system.create_folder(output);
         } catch(e) {
@@ -31,11 +33,13 @@ $('#new-folder-button').on('click', function(e) {
     update_display();
 });
 
+// create a new file
 $('#new-file-button').on('click', function(e) {
     $('.editor').show();
     $('.editor').attr('new-file', 'true');
 });
 
+// text editor for files
 $('.editor').on('keydown', function(e) {
     if (e.keyCode === 83 && e.ctrlKey === true) {
         e.preventDefault();
@@ -64,12 +68,14 @@ $('.editor').on('keydown', function(e) {
     }
 });
 
+// close button of text editor
 $('#close-button').on('click', function(e) {
     $('input[name="file-title"]').val('');
     $('textarea[name="file-content"]').val('');
     $('.editor').hide();
 });
 
+// selection and highlighting of files and folders
 $('.contents').on('click', '.box', function(e) {
     e.stopPropagation();
     if (e.altKey === true || e.ctrlKey === true) {
@@ -80,11 +86,13 @@ $('.contents').on('click', '.box', function(e) {
     }
 });
 
+// after clicking in other areas of the window, the highlighted nodes are unhilighted
 $('.window').on('click', function(e) {
     $('.box').removeClass('highlighted');
     $('.rename').hide();
 });
 
+// copy, cut and paste
 $(document).on('keydown', function(e) {
     if (e.keyCode === 8) {
         var names = [];
@@ -129,6 +137,8 @@ $(document).on('keydown', function(e) {
     }
 });
 
+// double click: if folder, opens folder
+// if file, opens editor and sets values of file if it already exists
 $('.window').on('dblclick', '.box', function(e) {
     if ($(this).hasClass('folder')) {
         var path = $(this).attr('data-path');
@@ -145,6 +155,7 @@ $('.window').on('dblclick', '.box', function(e) {
     }
 });
 
+// go back / move up a directory
 $('.back-button').on('click', function(e) {
     if (file_system.location !== file_system.tree.root) {
         file_system.change_directory(file_system.location.parent);
@@ -153,6 +164,7 @@ $('.back-button').on('click', function(e) {
     }
 });
 
+// accepts input in the address bar, changes directory if valid
 $('input[name="address-bar"]').on('keydown', function(e) {
     if (e.keyCode === 13) {
         try {
@@ -164,6 +176,7 @@ $('input[name="address-bar"]').on('keydown', function(e) {
     }
 });
 
+// search bar, finds and displays results
 $('input[name="search-bar"]').on('keydown', function(e) {
     if (e.keyCode === 13) {
         var query = $(this).val();
@@ -175,7 +188,8 @@ $('input[name="search-bar"]').on('keydown', function(e) {
         }
         for (var i=0; i < found.length; i++) {
             var curr = found[i];
-            $('.contents').append('<div class="box ' + curr.type + '" data-path="' + file_system.get_absolute_path(curr) + '"><p>' + curr.value + '</p></div>');
+            var path = file_system.get_absolute_path(curr);
+            $('.contents').append('<div class="box ' + curr.type + '" data-path="' + path + '"><p>' + path + '</p></div>');
         }
         $('#back-button').removeClass('not-clickable');
         if (file_system.location === file_system.tree.root) {
@@ -186,11 +200,13 @@ $('input[name="search-bar"]').on('keydown', function(e) {
     }
 });
 
+// exit from the search results
 $('#exit-search-button').on('click', function(e) {
     $(this).hide();
     update_display();
 });
 
+// right click on a box, shows rename button
 $('.contents').on('contextmenu', '.box', function(e) {
     e.preventDefault();
     $('.rename').show();
@@ -198,6 +214,7 @@ $('.contents').on('contextmenu', '.box', function(e) {
     $('.rename').attr('path', $(this).attr('data-path'));
 });
 
+// renames selected folder/file
 $('.rename').on('click', function(e) {
     var name = prompt('Enter new name');
     if (name !== '') {
@@ -206,4 +223,8 @@ $('.rename').on('click', function(e) {
     } else {
         alert('Please enter a name.');
     }
+});
+
+$('#readme-button').on('click', function(e) {
+    $('.readme').hide();
 });
