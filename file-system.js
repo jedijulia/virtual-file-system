@@ -45,21 +45,25 @@ function FileSystem() {
     this.copy = function(paths, destination) {
         for (var i=0; i < paths.length; i++) {
             var to_copy = this.get_from_path(paths[i]);
-            var copy = new Node(to_copy.value);
-            for (var j=0; j < to_copy.children.length; j++) {
-                var child = to_copy.children[j];
-                this.copy([this.get_absolute_path(child)], copy);
+            if (destination.find(to_copy.value) === null) {
+                var copy = new Node(to_copy.value);
+                for (var j=0; j < to_copy.children.length; j++) {
+                    var child = to_copy.children[j];
+                    this.copy([this.get_absolute_path(child)], copy);
+                }
+                copy.type = to_copy.type;
+                this.tree.insert(copy, destination);
             }
-            copy.type = to_copy.type;
-            this.tree.insert(copy, destination);
         }
     };
 
     this.move = function(paths, destination) {
         for (var i=0; i < paths.length; i++) {
             var to_move = this.get_from_path(paths[i]);
-            this.tree.remove(to_move);
-            this.tree.insert(to_move, destination);
+            if (destination.find(to_move.value) === null) {
+                this.tree.remove(to_move);
+                this.tree.insert(to_move, destination);
+            }
         }
     };
 
