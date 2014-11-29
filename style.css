@@ -17,6 +17,7 @@
     background-color: #6E63A7;
     position: relative;
     height: calc(100% - 65px);
+    overflow: auto;
 }
 
 .box {
@@ -38,6 +39,8 @@ p {
     margin-top: 120px;
     font-size: 16px;
     font-family: Consolas;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 p#no-results {
@@ -65,19 +68,19 @@ p#no-results {
 }
 
 input[name="address-bar"] {
-    width: 800px;
+    width: 50%;
     background-color: #bdc3c7;
     border: none;
 }
 
 input[name="search-bar"] {
-    width: 300px;
+    width: 20%;
     background-color: #bdc3c7;
     border: none;
 }
 
 .new-button {
-    width: 100px;
+    width: 8%;
     height: 35px;
     font-size: 14px;
     font-family: Consolas;
@@ -87,7 +90,7 @@ input[name="search-bar"] {
 }
 
 .back-button {
-    width: 60px;
+    width: 5%;
     height: 35px;
     font-size: 14px;
     font-family: Consolas;
@@ -171,4 +174,41 @@ input[name="file-title"] {
     display: none;
     z-index: 1;
     cursor: pointer;
+}
+
+.readme {
+    position: absolute;
+    width: 300px;
+    height: 340px;
+    top: 50%;
+    left: 50%;
+    margin-top: -170px;
+    margin-left: -150px;
+    z-index: 2;
+    background-color: #4D4479;
+    color: white;
+    padding: 5px 5px 5px 10px;
+}
+
+.readme p {
+    margin-top: 0px;
+    text-align: left;
+    font-size: 12px;
+}
+
+h2 {
+    font-family: Consolas;
+    color: #5DB0E6;
+}
+
+#readme-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+    font-family: Consolas;
+    z-index: 1;
+    background-color: #c0392b;
+    border-radius: 100px;
+    border: none;
 }

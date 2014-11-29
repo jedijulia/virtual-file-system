@@ -15,6 +15,20 @@
             </div>
             <button id="exit-search-button">Exit Search</button>
             <div class="rename">Rename</div>
+            <div class="readme">
+                <button id="readme-button">&times;</button>
+                <h2>Commands</h2>
+                <p> double click folder: open folder </p>
+                <p> double click file: edit file </p>
+                <p> click: select file/folder </p>
+                <p> ctrl/alt + click: select files/folders </p>
+                <p> ctrl + c: copy files/folders </p>
+                <p> ctrl + x: cut files/folders </p>
+                <p> ctrl + v: paste </p>
+                <p> ctrl + s (in the editor): save file </p>
+                <p> delete: delete files/folders </p>
+                <p> right click + rename: rename file/folder </p>
+            </div>
             <div class="contents"> 
             </div>
             <div class="editor"> 
@@ -23,12 +37,11 @@
                     <button id="close-button"> Close </button>
                 </div>
                 <div class="editor-text">
-                    <textarea name="file-content"></textarea>
+                    <textarea name="file-content" placeholder="ctrl+s to save"></textarea>
                 </div>
             </div>
         </div>
         <script src="jquery.js"></script>
-        <script src="tree.js"></script>
         <script src="file-system.js"></script>
         <script src="application.js"></script>
     </body>
