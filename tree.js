@@ -2,42 +2,43 @@ function Node(value) {
     this.value = value;
     this.parent = null;
     this.children = [];
-
-    // adds a node to the node's children
-    this.add_child = function(child) {
-        this.children.push(child);
-    };
-
-    // removes a node from the node's children
-    this.remove = function(child) {
-        var i = this.children.indexOf(child);
-        this.children.splice(i, 1);
-    };
-
-    // accepts a query, returns an array of nodes
-    this.search = function(query) {
-        var found = [];
-        if (this.value.match('^' + query + '$')) {
-            found.push(this);
-        }
-        for (var i=0; i < this.children.length; i++) {
-            var child = this.children[i];
-            found = found.concat(child.search(query));
-        }
-        return found;
-    };
-
-    // accepts a value, returns nodes that are direct children
-    this.find = function(to_find) {
-        for (var i=0; i < this.children.length; i++) {
-            var child = this.children[i];
-            if (child.value === to_find) {
-                return child
-            }
-        }
-        return null;
-    };
 }
+
+// adds a node to the node's children
+Node.prototype.add_child = function(child) {
+    this.children.push(child);
+};
+
+// removes a node from the node's children
+Node.prototype.remove = function(child) {
+    var i = this.children.indexOf(child);
+    this.children.splice(i, 1);
+};
+
+// accepts a query, returns an array of nodes
+Node.prototype.search = function(query) {
+    var found = [];
+    if (this.value.match('^' + query + '$')) {
+        found.push(this);
+    }
+    for (var i=0; i < this.children.length; i++) {
+        var child = this.children[i];
+        found = found.concat(child.search(query));
+    }
+    return found;
+};
+
+// accepts a value, returns nodes that are direct children
+Node.prototype.find = function(to_find) {
+    for (var i=0; i < this.children.length; i++) {
+        var child = this.children[i];
+        if (child.value === to_find) {
+            return child
+        }
+    }
+    return null;
+};
+
 
 function Tree(root) {
     this.root = root;
